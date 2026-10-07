@@ -1,0 +1,17 @@
+gcp:
+  project_id: "dp-synthetic-pipeline"  # Your GCP project ID
+  source_table: "bigquery-public-data.cms_medicare.inpatient_charges_2015"
+
+cohort:
+  output_parquet_path: "data/processed/cohort_raw.parquet"
+  target_column: "high_payment_flag"
+
+# Global Sensitivity: Delta f = upper - lower
+continuous_bounds:
+  total_discharges: [11.0, 500.0]
+  average_covered_charges: [2000.0, 150000.0]
+  average_medicare_payments: [3000.0, 50000.0]
+
+categorical_columns:
+  - "provider_state"
+  - "drg_code"
